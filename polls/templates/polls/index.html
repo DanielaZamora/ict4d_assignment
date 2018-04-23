@@ -1,15 +1,13 @@
 {% load static %}
 
-{% load static %}
-
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
 
-{% if all_topics_list %}
-<ul>
-    {% for topic in all_topics_list %}
-        <li><a href="{% url 'polls:index_question' topic.id %}">{{ topic.topic_name }}</a></li>
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.related_topic }}</a></li>
     {% endfor %}
-</ul>
+    </ul>
 {% else %}
-    <p>No topics available.</p>
+    <p>No topics are available.</p>
 {% endif %}

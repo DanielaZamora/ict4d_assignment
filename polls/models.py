@@ -4,13 +4,13 @@ from django.db import models
 from django.utils import timezone
 
 class Topic(models.Model):
-    topic_name = models.CharField(max_length=300, default='')
+    topic_name = models.CharField(max_length=300)
     def __str__(self):
         return self.topic_name
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
-    related_topic = models.ForeignKey(Topic, on_delete=models.CASCADE,default='')
+    related_topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')
     def __str__(self):
         return self.question_text
