@@ -3,7 +3,14 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
+class Topic(models.Model):
+    topic_name = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    def __str__(self):
+        return self.topic_name
+
 class Question(models.Model):
+    related_topic = models.ForeignKey(Topic, on_delete=models.CASCADE, default='NONE')
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     def __str__(self):
@@ -21,9 +28,3 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __str__(self):
         return self.choice_text
-
-class Correct(models.Model):
-    choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
-    correct_answer = models.CharField(max_length=200)
-    def __str__(self):
-        return self.correct_answer
