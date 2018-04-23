@@ -23,7 +23,7 @@ class Choice(models.Model):
         return self.choice_text
 
 class Correct(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
     correct_answer = models.CharField(max_length=200)
     def __str__(self):
-        return self.choice_text
+        return self.correct_answer
