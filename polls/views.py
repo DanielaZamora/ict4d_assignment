@@ -4,13 +4,20 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Choice, Question
+from .models import Choice, Question, Topic
 
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
+    all_topics = 'all_topics_list'
     
+    def get_queryset(self):
+        return Topic.objects.all()
+
+class Index_Questions(generic.ListView):
+    template_name = 'polls/index_question.html'
+    context_object_name = 'latest_question_list'
+
     def get_queryset(self):
         """
         Return the last five published questions (not including those set to be
